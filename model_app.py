@@ -2,25 +2,30 @@ import pandas as pd
 import streamlit as st
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
+def make_columns():
+    col1, col2 = st.columns([0.3, 0.7])
+    return col1, col2
+
 def process_main_page():
+    global col1
     show_title()
-    process_inputs()
+    process_inputs_col1(col1)
 
 def show_title():
-    st.header("Предсказание стоимости страховки")
-    st.subheader("на основе модели линейной регрессии")
+    st.title("Предсказание стоимости страховки")
+    st.header("на основе модели линейной регрессии")
     st.divider()
-    st.subheader("Введите данные")
 
-def input_features():
-    age = st.slider("Возраст", min_value=18, max_value=90, value=18,
+def input_features(col1):
+    col1.subheader("Введите данные")
+    age = col1.slider("Возраст", min_value=18, max_value=90, value=18,
                             step=1)
-    sex = st.radio("Пол", ("Мужской", "Женский"))
-    bmi = st.number_input("Индекс массы тела:")
-    children = st.slider("Количество детей", min_value=0, max_value=5, value=1,
+    sex = col1.radio("Пол", ("Мужской", "Женский"))
+    bmi = col1.number_input("Индекс массы тела:")
+    children = col1.slider("Количество детей", min_value=0, max_value=5, value=1,
                          step=1)
-    smoker = st.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
-    region = st.selectbox("Регион проживания", ("northwest", "southeast", "northeast", "southwest"))
+    smoker = col1.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
+    region = col1.selectbox("Регион проживания", ("northwest", "southeast", "northeast", "southwest"))
     translate = {"Мужской": "male", "Женский": "female", "Да": "yes", "Нет": "no"}
 
     data = {
@@ -35,24 +40,20 @@ def input_features():
     user_data = pd.DataFrame(data, index = [0])
     return user_data
 
-def write_user_data(df):
-    st.write("## Ваши данные")
-    st.write(df)
+def write_user_data(col1, df):
+    col1.subheader("Ваши данные")
+    col1.write(df)
 
-def write_prediction(prediction):
-    st.write("## Предсказание")
-    st.write(prediction)
-
-def process_inputs():
-    st.header('Заданные пользователем параметры')
-    user_input_df = input_features()
-    write_user_data(user_input_df)
+def process_inputs_col1(col1):
+    col1.subheader('Заданные пользователем параметры')
+    user_input_df = input_features(col1)
+    write_user_data(col1, user_input_df)
     train_df = open_table(url)
     train_X_df, _ = split_table(train_df)
     full_X_df = pd.concat((user_input_df, train_X_df), axis=0)
     preprocessed_X_df = scale_data(full_X_df, [], test = False)
-    text_prediction = load_model_and_predict(preprocessed_X_df)
-    write_prediction(text_prediction)
+    col1.subheader("Предсказание")
+    col1.write(f"Предсказанная стоимость страховки: {load_model_and_predict(preprocessed_X_df)}")
 
 if __name__ == "__main__":
     process_main_page()

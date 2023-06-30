@@ -66,8 +66,10 @@ def load_model_and_predict(df, model_path="data/model_weights.mw"):
         model = load(file)
 
     prediction = model.predict(df)[0]
-
-    return f"Предсказание стоимости страховки: {round(prediction, 2)}"
+    if prediction > 0:
+        return prediction
+    else:
+        return 0
 
 if __name__ == "__main__":
     df = open_table(url)
