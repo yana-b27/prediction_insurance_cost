@@ -26,7 +26,7 @@ def scale_data(X_train, X_test, test = True):
     categorical = ['sex', 'smoker', 'region']
     numeric_features = ["age", "bmi", "children"]
     column_transformer = ColumnTransformer([
-        ('ohe', OneHotEncoder(drop='first', handle_unknown="ignore"), categorical),
+        ('ohe', OneHotEncoder(handle_unknown="ignore"), categorical),
         ('scaling', MinMaxScaler(), numeric_features)
     ])
     X_train_transformed = column_transformer.fit_transform(X_train)
