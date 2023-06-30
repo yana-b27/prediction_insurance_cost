@@ -20,7 +20,7 @@ def input_features():
     children = st.slider("Количество детей", min_value=0, max_value=5, value=1,
                          step=1)
     smoker = st.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
-    region = st.selectbox("Регион проживания", ("Northwest", "Southeast", "Northeast", "Southwest"))
+    region = st.selectbox("Регион проживания", ("northwest", "southeast", "northeast", "southwest"))
     translate = {"Мужской": "male", "Женский": "female", "Да": "yes", "Нет": "no"}
 
     data = {
