@@ -50,7 +50,7 @@ def process_inputs():
     train_df = open_table(url)
     train_X_df, _ = split_table(train_df)
     full_X_df = pd.concat((user_input_df, train_X_df), axis=0)
-    preprocessed_X_df = scale_data(full_X_df, full_X_df, test = False)
+    preprocessed_X_df = scale_data(full_X_df, [], test = False)
     text_prediction = load_model_and_predict(preprocessed_X_df)
     write_prediction(text_prediction)
 
