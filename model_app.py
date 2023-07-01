@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-import plotly_express as px
+import plotly.express as px
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
 st.set_page_config(
