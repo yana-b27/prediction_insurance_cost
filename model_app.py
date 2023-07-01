@@ -1,13 +1,14 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-from model_file import url, open_table, split_table, scale_data, load_model_and_predict
+from model_file import url, open_table, split_table, scale_data, load_model_and_predict, mae
 
 st.set_page_config(
     layout="wide",
 )
 
 def show_title():
+    st.image("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(up)")
     st.title("Предсказание стоимости страховки")
     st.header("на основе модели линейной регрессии")
     st.divider()
@@ -44,12 +45,14 @@ def main_page():
         full_X_df = pd.concat((user_data, train_X_df), axis=0)
         preprocessed_X_df = scale_data(full_X_df, [], test=False)
         st.subheader("Предсказание")
-        prediction, mae = load_model_and_predict(preprocessed_X_df, train_y_df)
+        prediction = load_model_and_predict(preprocessed_X_df)
         if prediction > 0:
             st.info(f"Предсказанная стоимость страховки: {prediction}")
+            st.write(f"Средняя абсолютная ошибка предсказания: {mae}")
         else:
             st.info(f"Предсказанная стоимость страховки: {prediction}. Вам страховка не нужна:)")
-        st.write(f"Средняя абсолютная ошибка равна: {mae}")
+
+
 
     with col2:
         st.header("Что влияет на стоимость страховки больше всего?")
@@ -71,6 +74,7 @@ def main_page():
 def additional_info():
     st.divider()
     st.write("Использованный набор данных был взят из репозитория по ссылке: https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv")
+    st.image("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(down)")
 
 def process_main_page():
     show_title()

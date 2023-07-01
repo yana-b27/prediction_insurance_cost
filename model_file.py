@@ -56,27 +56,26 @@ def fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test,
 
     if test:
         mae = mean_absolute_error(y_test, pred)
-        return f"Средняя абсолютная ошибка равна: {round(mae, 2)}"
+        return mae
     else:
         mae = mean_absolute_error(y_train, pred)
-        return f"Средняя абсолютная ошибка равна: {round(mae, 2)}"
+        return mae
 
-def load_model_and_predict(df, y_train, model_path="data/model_weights.mw"):
+def load_model_and_predict(df, model_path="data/model_weights.mw"):
     with open(model_path, "rb") as file:
         model = load(file)
 
     prediction = model.predict(df)[0]
-    mae = mean_absolute_error(y_train, prediction)
 
     if prediction > 0:
-        return prediction, mae
+        return prediction
     else:
-        return 0, mae
+        return 0
 
 if __name__ == "__main__":
     df = open_table(url)
     X, y = split_table(df)
     X_train, X_test, y_train, y_test = make_train_and_test_matrix(X, y)
     X_train_transformed, X_test_transformed = scale_data(X_train, X_test)
-    fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path="data/model_weights.mw")
-    prediction, mae = load_model_and_predict(X_train_transformed, y_train, model_path="data/model_weights.mw")
+    mae = fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path="data/model_weights.mw")
+    prediction = load_model_and_predict(X_train_transformed, model_path="data/model_weights.mw")
