@@ -68,7 +68,7 @@ def main_page():
             st.plotly_chart(fig2)
             st.write("При увеличении индекса массы тела стоимость страховки на здоровье повышается. После отказа от курения вам нужно сократить значение индекса - похудеть.")
         with tab3:
-            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", color = "bmi", color_continuous_scale= px.colors.sequential.Plasma)
+            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", color = "bmi", color_continuous_scale= px.colors.sequential.Blackbody_r)
             st.plotly_chart(fig3)
             st.write("В больших возрастах стоимость страховки увеличивается - это необходимо учитывать при покупке страховки на здоровье.")
 
