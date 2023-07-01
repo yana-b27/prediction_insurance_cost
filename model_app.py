@@ -37,7 +37,23 @@ def main_page():
         full_X_df = pd.concat((user_data, train_X_df), axis=0)
         preprocessed_X_df = scale_data(full_X_df, [], test=False)
         st.subheader("Предсказание")
-        st.write(f"Предсказанная стоимость страховки: {load_model_and_predict(preprocessed_X_df)}")
+        prediction = load_model_and_predict(preprocessed_X_df)
+        if prediction > 0:
+            st.write(f"Предсказанная стоимость страховки: {prediction}")
+        else:
+            st.write(f"Предсказанная стоимость страховки: {prediction}. Вам страховка не нужна:)")
+    with col2:
+        st.header("Что влияет на стоимость страховки больше всего?")
+        tab1, tab2, tab3 = st.tabs(["Курение", "Индекс массы тела", "Owl"])
+        with tab1:
+            st.write(" ")
+            st.write("Курение оказывает значительное влияние на стоимость страховки, повышая ее на ____ условных единиц")
+        with tab2:
+            st.write(" ")
+            st.write("Индекс массы тела повышает стоимость страховки на ___ условных единиц")
+        with tab3:
+            st.write(" ")
+            st.write("Индекс массы тела повышает стоимость страховки на ___ условных единиц")
 
 def process_main_page():
     show_title()
