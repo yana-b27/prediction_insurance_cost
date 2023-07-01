@@ -2,6 +2,9 @@ import pandas as pd
 import streamlit as st
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
+st.set_page_config(
+    layout="wide",
+)
 def main_page():
     col1, col2 = st.columns([0.3, 0.7])
     with col1:
@@ -33,8 +36,8 @@ def main_page():
         train_X_df, _ = split_table(train_df)
         full_X_df = pd.concat((user_data, train_X_df), axis=0)
         preprocessed_X_df = scale_data(full_X_df, [], test=False)
-        col1.subheader("Предсказание")
-        col1.write(f"Предсказанная стоимость страховки: {load_model_and_predict(preprocessed_X_df)}")
+        st.subheader("Предсказание")
+        st.write(f"Предсказанная стоимость страховки: {load_model_and_predict(preprocessed_X_df)}")
 
 def process_main_page():
     show_title()
