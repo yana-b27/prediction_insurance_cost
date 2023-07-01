@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 def show_title():
-    image_up = Image.open("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(up)")
+    image_up = Image.open("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg")
     st.image(image_up)
     st.title("Предсказание стоимости страховки")
     st.header("на основе модели линейной регрессии")
@@ -75,7 +75,8 @@ def main_page():
 def additional_info():
     st.divider()
     st.write("Использованный набор данных был взят из репозитория по ссылке: https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv")
-    st.image("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(down)")
+    image_down = Image.open("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(down).jpg")
+    st.image(image_down)
 
 def process_main_page():
     show_title()
