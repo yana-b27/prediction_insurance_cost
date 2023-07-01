@@ -62,13 +62,13 @@ def main_page():
         with tab1:
             fig1 = px.box(data_frame = train_df, x = "smoker", y = "charges", points="all")
             st.plotly_chart(fig1)
-            st.markdown("Курение оказывает значительное влияние на стоимость страховки. Наличие факта курения повышает страховку на более чем **23.000** условные единицы. Поэтому если вы хотите сократить стоимость страховки на здоровье, вам нужно бросить курение в первую очередь.")
+            st.markdown("Курение оказывает значительное влияние на стоимость страховки. Наличие факта курения повышает страховку на более чем **23000** условные единицы. Поэтому если вы хотите сократить стоимость страховки на здоровье, вам нужно бросить курение в первую очередь.")
         with tab2:
-            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges",  color = "smoker", color_discrete_sequence= px.colors.qualitative.Bold)
+            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges",  color = "region", color_discrete_sequence= px.colors.qualitative.Bold)
             st.plotly_chart(fig2)
             st.write("При увеличении индекса массы тела стоимость страховки на здоровье повышается. После отказа от курения вам нужно сократить значение индекса - похудеть.")
         with tab3:
-            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", color = "bmi", color_continuous_scale= px.colors.sequential.Blackbody_r)
+            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", color = "bmi", color_continuous_scale= px.colors.sequential.Electric_r)
             st.plotly_chart(fig3)
             st.write("В больших возрастах стоимость страховки увеличивается - это необходимо учитывать при покупке страховки на здоровье.")
 
