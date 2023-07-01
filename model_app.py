@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-from model_file import url, open_table, split_table, scale_data, load_model_and_predict, mae
+from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
 st.set_page_config(
     layout="wide",
@@ -48,7 +48,6 @@ def main_page():
         prediction = load_model_and_predict(preprocessed_X_df)
         if prediction > 0:
             st.info(f"Предсказанная стоимость страховки: {prediction}")
-            st.write(f"Средняя абсолютная ошибка предсказания: {mae}")
         else:
             st.info(f"Предсказанная стоимость страховки: {prediction}. Вам страховка не нужна:)")
 

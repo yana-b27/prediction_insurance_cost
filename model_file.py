@@ -77,5 +77,5 @@ if __name__ == "__main__":
     X, y = split_table(df)
     X_train, X_test, y_train, y_test = make_train_and_test_matrix(X, y)
     X_train_transformed, X_test_transformed = scale_data(X_train, X_test)
-    mae = fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path="data/model_weights.mw")
+    fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path="data/model_weights.mw")
     prediction = load_model_and_predict(X_train_transformed, model_path="data/model_weights.mw")
