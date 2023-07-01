@@ -22,8 +22,7 @@ def main_page():
         age = st.slider("Возраст", min_value=18, max_value=90, value=30,
                           step=1)
         sex = st.radio("Пол", ("Мужской", "Женский"))
-        bmi = st.number_input("Индекс массы тела:", min_value=15, max_value=50, value = 25,
-                              step = 0.2)
+        bmi = st.number_input("Индекс массы тела:", value = 25, step = 0.01)
         children = st.slider("Количество детей", min_value=0, max_value=5, value=1,
                                step=1)
         smoker = st.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
