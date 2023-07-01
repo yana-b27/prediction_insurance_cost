@@ -16,13 +16,14 @@ def show_title():
     st.divider()
 
 def main_page():
-    col1, col2 = st.columns([0.3, 0.7], gap = "medium")
+    col1, col2 = st.columns([0.3, 0.7], gap = "large")
     with col1:
-        st.subheader("Введите данные")
+        st.header("Введите данные")
         age = st.slider("Возраст", min_value=18, max_value=90, value=30,
                           step=1)
         sex = st.radio("Пол", ("Мужской", "Женский"))
-        bmi = st.number_input("Индекс массы тела:", value = 25)
+        bmi = st.number_input("Индекс массы тела:", min_value=15, max_value=50, value = 25,
+                              step = 0.2)
         children = st.slider("Количество детей", min_value=0, max_value=5, value=1,
                                step=1)
         smoker = st.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
@@ -60,15 +61,15 @@ def main_page():
         tab1, tab2, tab3 = st.tabs(["Курение", "Индекс массы тела", "Возраст"])
 
         with tab1:
-            fig1 = px.bar(data_frame = train_df, x = "smoker", y = "charges", barmode = "group")
+            fig1 = px.box(data_frame = train_df, x = "smoker", y = "charges", points="all")
             st.plotly_chart(fig1)
-            st.write("Курение оказывает значительное влияние на стоимость страховки. Наличие факта курения повышает страховку на ____ условных единиц. Поэтому если вы хотите сократить стоимость страховки, вам нужно бросить курение в первую очередь.")
+            st.markdown("Курение оказывает значительное влияние на стоимость страховки. Наличие факта курения повышает страховку на более чем **23.000** условные единицы. Поэтому если вы хотите сократить стоимость страховки, вам нужно бросить курение в первую очередь.")
         with tab2:
-            fig2 = px.scatter(train_df, x = "bmi", y = "charges", trendline = "ols")
+            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges")
             st.plotly_chart(fig2)
             st.write("При увеличении индекса массы тела на 1 стоимость страховки повышается на ____ условных единиц. После отказа от курения вам нужно сократить значение индекса - похудеть.")
         with tab3:
-            fig3 = px.scatter(train_df, x = "age", y = "charges", trendline = "ols")
+            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges")
             st.plotly_chart(fig3)
             st.write("В больших возрастах стоимость страховки повышается - так, при увеличении возраста на 1 год стоимость увеличивается на ___ условных единиц.")
 
