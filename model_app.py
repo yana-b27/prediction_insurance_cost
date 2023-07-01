@@ -1,18 +1,25 @@
 import pandas as pd
 import streamlit as st
+import plotly_express as px
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
 st.set_page_config(
     layout="wide",
 )
+
+def show_title():
+    st.title("Предсказание стоимости страховки")
+    st.header("на основе модели линейной регрессии")
+    st.divider()
+
 def main_page():
-    col1, col2 = st.columns([0.3, 0.7])
+    col1, col2 = st.columns([0.3, 0.7], gap = "medium")
     with col1:
         st.subheader("Введите данные")
-        age = st.slider("Возраст", min_value=18, max_value=90, value=18,
+        age = st.slider("Возраст", min_value=18, max_value=90, value=30,
                           step=1)
         sex = st.radio("Пол", ("Мужской", "Женский"))
-        bmi = st.number_input("Индекс массы тела:")
+        bmi = st.number_input("Индекс массы тела:", value = 25)
         children = st.slider("Количество детей", min_value=0, max_value=5, value=1,
                                step=1)
         smoker = st.radio("Являетесь ли вы курильщиком?", ("Да", "Нет"))
@@ -33,36 +40,42 @@ def main_page():
         st.write(user_data)
 
         train_df = open_table(url)
-        train_X_df, _ = split_table(train_df)
+        train_X_df, train_y_df = split_table(train_df)
         full_X_df = pd.concat((user_data, train_X_df), axis=0)
         preprocessed_X_df = scale_data(full_X_df, [], test=False)
         st.subheader("Предсказание")
-        prediction = load_model_and_predict(preprocessed_X_df)
+        prediction, mae = load_model_and_predict(preprocessed_X_df, train_y_df)
         if prediction > 0:
-            st.write(f"Предсказанная стоимость страховки: {prediction}")
+            st.info(f"Предсказанная стоимость страховки: {prediction}")
         else:
-            st.write(f"Предсказанная стоимость страховки: {prediction}. Вам страховка не нужна:)")
+            st.info(f"Предсказанная стоимость страховки: {prediction}. Вам страховка не нужна:)")
+        st.write(f"Средняя абсолютная ошибка равна: {mae}")
+
     with col2:
         st.header("Что влияет на стоимость страховки больше всего?")
-        tab1, tab2, tab3 = st.tabs(["Курение", "Индекс массы тела", "Owl"])
+        tab1, tab2, tab3 = st.tabs(["Курение", "Индекс массы тела", "Возраст"])
+
         with tab1:
-            st.write(" ")
-            st.write("Курение оказывает значительное влияние на стоимость страховки, повышая ее на ____ условных единиц")
+            fig1 = px.bar(data_frame = train_df, x = "smoker", y = "charges", barmode = "group")
+            st.plotly_chart(fig1)
+            st.write("Курение оказывает значительное влияние на стоимость страховки. Наличие факта курения повышает страховку на ____ условных единиц. Поэтому если вы хотите сократить стоимость страховки, вам нужно бросить курение в первую очередь.")
         with tab2:
-            st.write(" ")
-            st.write("Индекс массы тела повышает стоимость страховки на ___ условных единиц")
+            fig2 = px.scatter(train_df, x = "bmi", y = "charges", trendline = "ols")
+            st.plotly_chart(fig2)
+            st.write("При увеличении индекса массы тела на 1 стоимость страховки повышается на ____ условных единиц. После отказа от курения вам нужно сократить значение индекса - похудеть.")
         with tab3:
-            st.write(" ")
-            st.write("Индекс массы тела повышает стоимость страховки на ___ условных единиц")
+            fig3 = px.scatter(train_df, x = "age", y = "charges", trendline = "ols")
+            st.plotly_chart(fig3)
+            st.write("В больших возрастах стоимость страховки повышается - так, при увеличении возраста на 1 год стоимость увеличивается на ___ условных единиц.")
+
+def additional_info():
+    st.divider()
+    st.write("Использованный набор данных был взят из репозитория по ссылке: https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv")
 
 def process_main_page():
     show_title()
     main_page()
-
-def show_title():
-    st.title("Предсказание стоимости страховки")
-    st.header("на основе модели линейной регрессии")
-    st.divider()
+    additional_info()
 
 if __name__ == "__main__":
     process_main_page()
