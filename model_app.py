@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from PIL import Image
 import plotly.express as px
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
@@ -8,7 +9,8 @@ st.set_page_config(
 )
 
 def show_title():
-    st.image("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(up)")
+    image_up = Image.open("prediction_insurance_cost/data/myriam-zilles-KltoLK6Mk-g-unsplash(up)")
+    st.image(image_up)
     st.title("Предсказание стоимости страховки")
     st.header("на основе модели линейной регрессии")
     st.divider()
