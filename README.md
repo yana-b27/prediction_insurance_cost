@@ -1,12 +1,12 @@
 # prediction_insurance_cost
-
+![Лекарства](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
 ## Общее описание набора данных
 
 Данный проект посвящен предсказанию стоимости страховки на здоровье с помощью модели линейной регрессии и создания приложения для предсказания стоимости с использованием языка программирования Python. В проекте использовался датасет из книги "Machine Learning with R", скачанный по [ссылке](https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv). В наборе данных содержится следующая информация:
 
 - `age`: возраст
 - `sex`: пол
-- `bm`i: индекс массы тела
+- `bmi`: индекс массы тела
 - `children`: кол-во детей у респондента
 - `smoker`: является ли респондент курильщиком или нет
 - `region`: регион проживания
@@ -18,8 +18,8 @@
 
 ## Содержимое репозитория
 
-- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda_and_prediction_model/pred_insurance.ipynb) - разведочный анализ данных и построение модели линейной регрессии
-- [model_file.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_file.py) - предварительная обработка данных и предсказательная модель, собранные в виде функций, агрегирующих процесс предсказания
+- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda_and_prediction_model/pred_insurance.ipynb) в папке eda_and_prediction_model - разведочный анализ данных и построение модели линейной регрессии
+- [model_file.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_file.py) - предварительная обработка данных и предсказательная модель, собранные в виде функций, агрегирующих процесс предсказания стоимости страховки
 - [model_app.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_app.py) - скрипт приложения, построенного на основе фреймворка streamlit, который импортирует функции из модуля model_file
 - [data](https://github.com/yana-b27/prediction_insurance_cost/tree/main/data) - папка, в которой находится файл с коэффициентами модели регрессии model_weights.mw, файлы изображений, использованные для создания приложения streamlit и для создания файла readme.md. Изображение для приложения было получено по [ссылке](https://unsplash.com/photos/KltoLK6Mk-g)
 
