@@ -1,8 +1,7 @@
 # prediction_insurance_cost
 ![Drugs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
 
-> [!WARNING]
-> The app is on update now
+_The app is on update now!_
 
 This project is about a prediction of health insurance cost using Linear regression model and creating an application for prediction the cost through Python porgramming language and Streamlit framework. 
 
