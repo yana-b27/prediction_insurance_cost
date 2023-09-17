@@ -1,32 +1,39 @@
 # prediction_insurance_cost
-![Лекарства](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
-## Общее описание набора данных
+![Drugs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
+[!WARNING]
+The repository is on update now
 
-Данный проект посвящен предсказанию стоимости страховки на здоровье с помощью модели линейной регрессии и создания приложения для предсказания стоимости с использованием языка программирования Python. В проекте использовался датасет из книги "Machine Learning with R", скачанный по [ссылке](https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv). В наборе данных содержится следующая информация:
+This project is about a prediction of health insurance cost using Linear regression model and creating an application for prediction the cost through Python porgramming language and Streamlit framework. 
 
-- `age`: возраст
-- `sex`: пол
-- `bmi`: индекс массы тела
-- `children`: кол-во детей у респондента
-- `smoker`: является ли респондент курильщиком или нет
-- `region`: регион проживания
-- `charges`: стоимость страховки здоровья
+## Dataset info
 
-## Использованные модули и библиотеки Python
+The dataset from the book "Machine Learning with R" was downloaded via the [link](https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv). There are the next features in the dataset:
 
-Разведочный анализ данных произведен с помощью библиотек pandas и seaborn для построения графиков. Доя подготовки данных к построению модели использовался модуль sklearn для кодирования категориальных признаков, сформирования обучающей и тестовой выборки, в дальнейшем с этим модулем было произведено построение модели линейной регрессии. Для создания приложения применялась библиотека streamlit, pillow для загрузки изображений, plotly для создания интерактивных графиков, описывающих данные и объясняющих полученную стоимость страховки на здоровье.
+- `age`: age of the respondent
+- `sex`: gender of the respondent
+- `bmi`: bosy mass index
+- `children`: the amount of children
+- `smoker`: the indicator if the respondent smokes
+- `region`: the region where respondent lives
+- `charges`: the cost of insurance cost
 
-## Содержимое репозитория
+## Used Pyhton libraries
 
-- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda_and_prediction_model/pred_insurance.ipynb) в папке eda_and_prediction_model - разведочный анализ данных и построение модели линейной регрессии
-- [model_file.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_file.py) - предварительная обработка данных и предсказательная модель, собранные в виде функций, агрегирующих процесс предсказания стоимости страховки
-- [model_app.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_app.py) - скрипт приложения, построенного на основе фреймворка streamlit, который импортирует функции из модуля model_file
-- [data](https://github.com/yana-b27/prediction_insurance_cost/tree/main/data) - папка, в которой находится файл с коэффициентами модели регрессии model_weights.mw, файлы изображений, использованные для создания приложения streamlit и для создания файла readme.md. Изображение для приложения было получено по [ссылке](https://unsplash.com/photos/KltoLK6Mk-g)
+Exploratory data analysis was processed with pandas and seaborn libraries. To prepare data for building a model, the sklearn module was imported to encode categorical features, form a training and test set. Then, using the same library, Linear regresssion model was used for test data prediciton. Streamlit framework was used for creating a web application, with pillow library images were visualized in the app and plotly module was used for creating interactive graphs.
 
-## Общее описание приложения
+## Repository structure
 
-**Приложение доступно по [ссылке](https://prediction-insurance-cost.streamlit.app/)**
+- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda_and_prediction_model/pred_insurance.ipynb) в папке eda_and_prediction_model - exploratory data analysis and building Linear regression model
+- [model_file.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_file.py) -data processing and prediction model collected in Pyhton functions
+- [model_app.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_app.py) - code of the app built on Streamlit framework, which imports functions of the model_file module
+- [data](https://github.com/yana-b27/prediction_insurance_cost/tree/main/data) - folder with the coefficients of the model stored in the file model_weights.mw
 
-В приложении stremalit пользователи могут задать параметры для предсказания стоимости страховки в специальном поле, причем в поле ввода данных установлены значения по умолчанию. Параллельно с полем ввода данных в приложении есть поле, интерпретирующее полученный результат предсказания на основе модели. В нем присутствуют интерактивные графики, которые помогают пользователю интерпретировать предсказание вместе с объясняющим текстом.
+Used images of the application were downloaded via the [link](https://unsplash.com/photos/KltoLK6Mk-g)
 
-![Интерактивные графики в приложении streamlit](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/pred_cost_graphs.gif)
+## Web app info
+
+**The app is available via the [link](https://prediction-insurance-cost.streamlit.app/)**
+
+In streamlit appplication users can input features for prediction insurance cost in the special field. In parallel with the data entry field in the application, there is a field that interprets the resulting prediction result based on the model. It features interactive graphs that help the user interpret the prediction along with explanatory text.
+
+![Interactive graphs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/pred_cost_graphs.gif)
