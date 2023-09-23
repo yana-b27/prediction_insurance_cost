@@ -5,9 +5,10 @@ import plotly.express as px
 from model_file import url, open_table, split_table, scale_data, load_model_and_predict
 
 st.set_page_config(
-    page_icon = Image.open("images/pills.png"),
+    page_icon=Image.open("images/pills.png"),
     layout="wide",
 )
+
 
 def show_title():
     image_up = Image.open("images/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg")
@@ -16,16 +17,17 @@ def show_title():
     st.header("based on Linear regression model")
     st.divider()
 
+
 def main_page():
-    col1, col2 = st.columns([0.3, 0.7], gap = "large")
+    col1, col2 = st.columns([0.3, 0.7], gap="large")
     with col1:
         st.header("Input data")
         age = st.slider("Age", min_value=18, max_value=90, value=30,
-                          step=1)
+                        step=1)
         sex = st.radio("Gender", ("Male", "Female"))
-        bmi = st.number_input("Body mass index:", value = 25)
+        bmi = st.number_input("Body mass index:", value=25)
         children = st.slider("Children", min_value=0, max_value=5, value=1,
-                               step=1)
+                             step=1)
         smoker = st.radio("Smoker", ("Yes", "No"))
         region = st.selectbox("Region", ("northwest", "southeast", "northeast", "southwest"))
         translate = {"Male": "male", "Female": "female", "Yes": "yes", "No": "no"}
@@ -59,30 +61,39 @@ def main_page():
         tab1, tab2, tab3 = st.tabs(["Smoking", "Body mass index", "Age"])
 
         with tab1:
-            fig1 = px.strip(data_frame = train_df, x = "smoker", y = "charges")
-            fig1.add_hline(y = train_df[train_df.smoker == 'yes'].mean(), line_color = "crimson")
-            fig1.add_hline(y = train_df[train_df.smoker == 'no'].mean(), line_color = "limegreen")
+            fig1 = px.histogram(data_frame=train_df, x='smoker', y='charges', opacity=0.7, histfunc='avg')
             st.plotly_chart(fig1)
-            st.markdown("Smoking has a significant impact on the cost of insurance. The fact of smoking increases insurance by more than **23,000** units. So if you want to reduce the cost of your health insurance, you need to quit smoking first.")
+            st.markdown(
+                "Smoking has a significant impact on the cost of insurance. The fact of smoking increases insurance "
+                "by more than **23,000** units. So if you want to reduce the cost of your health insurance, "
+                "you need to quit smoking first.")
         with tab2:
-            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges", color = "crimson", opacity = 0.7)
+            fig2 = px.scatter(data_frame=train_df, x="bmi", y="charges", color="crimson", opacity=0.7)
             st.plotly_chart(fig2)
-            st.write("As your body mass index increases, the cost of health insurance increases too. After quitting smoking, you need to reduce the index value - lose weight.")
+            st.write(
+                "As your body mass index increases, the cost of health insurance increases too. After quitting "
+                "smoking, you need to reduce the index value - lose weight.")
         with tab3:
-            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", opacity = 0.7)
+            fig3 = px.scatter(data_frame=train_df, x="age", y="charges", opacity=0.7)
             st.plotly_chart(fig3)
-            st.write("At older ages, the cost of insurance increases - this must be taken into account when purchasing health insurance.")
+            st.write("At older ages, the cost of insurance increases - this must be taken into account when "
+                     "purchasing health insurance.")
+
 
 def additional_info():
     st.divider()
-    st.write("The data was retrived from the repository via the [link](https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv).")
+    st.write(
+        "The data was retrived from the repository via the [link]("
+        "https://github.com/stedy/Machine-Learning-with-R-datasets/blob/master/insurance.csv).")
     image_down = Image.open("images/myriam-zilles-KltoLK6Mk-g-unsplash(down).jpg")
     st.image(image_down)
+
 
 def process_main_page():
     show_title()
     main_page()
     additional_info()
+
 
 if __name__ == "__main__":
     process_main_page()

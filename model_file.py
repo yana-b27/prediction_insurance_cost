@@ -8,21 +8,24 @@ from pickle import dump, load
 
 url = "https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/master/insurance.csv"
 
+
 def open_table(url):
     df = pd.read_csv(url)
     return df
+
 
 def split_table(df):
     X = df.drop(["charges"], axis=1)
     y = df['charges']
     return X, y
 
-def make_train_and_test_matrix(X, y):
 
+def make_train_and_test_matrix(X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
     return X_train, X_test, y_train, y_test
 
-def scale_data(X_train, X_test, test = True):
+
+def scale_data(X_train, X_test, test=True):
     categorical = ['sex', 'smoker', 'region']
     numeric_features = ["age", "bmi", "children"]
     column_transformer = ColumnTransformer([
@@ -42,8 +45,9 @@ def scale_data(X_train, X_test, test = True):
     else:
         return X_train_transformed
 
-def fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path ="data/model_weights.mw", test = True):
 
+def fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test, model_path="data/model_weights.mw",
+                       test=True):
     model = LinearRegression()
     model.fit(X_train_transformed, y_train)
     if test:
@@ -61,6 +65,7 @@ def fit_and_save_model(X_train_transformed, y_train, X_test_transformed, y_test,
         mae = mean_absolute_error(y_train, pred)
         return mae
 
+
 def load_model_and_predict(df, model_path="data/model_weights.mw"):
     with open(model_path, "rb") as file:
         model = load(file)
@@ -71,6 +76,7 @@ def load_model_and_predict(df, model_path="data/model_weights.mw"):
         return prediction
     else:
         return 0
+
 
 if __name__ == "__main__":
     df = open_table(url)
