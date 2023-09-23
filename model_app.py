@@ -61,14 +61,14 @@ def main_page():
         tab1, tab2, tab3 = st.tabs(["Smoking", "Body mass index", "Age"])
 
         with tab1:
-            fig1 = px.histogram(data_frame=train_df, x='smoker', y='charges', opacity=0.7, histfunc='avg')
+            fig1 = px.histogram(data_frame=train_df, x='smoker', y='charges', opacity=0.6, histfunc='avg', color='mediumslateblue')
             st.plotly_chart(fig1)
             st.markdown(
                 "Smoking has a significant impact on the cost of insurance. The fact of smoking increases insurance "
                 "by more than **23,000** units. So if you want to reduce the cost of your health insurance, "
                 "you need to quit smoking first.")
         with tab2:
-            fig2 = px.scatter(data_frame=train_df, x="bmi", y="charges", color="crimson", opacity=0.7)
+            fig2 = px.scatter(data_frame=train_df, x="bmi", y="charges", opacity=0.7)
             st.plotly_chart(fig2)
             st.write(
                 "As your body mass index increases, the cost of health insurance increases too. After quitting "
