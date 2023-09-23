@@ -47,7 +47,7 @@ def main_page():
         train_X_df, train_y_df = split_table(train_df)
         full_X_df = pd.concat((user_data, train_X_df), axis=0)
         preprocessed_X_df = scale_data(full_X_df, [], test=False)
-        st.subheader("Prediction")
+        st.header("Prediction")
         prediction = load_model_and_predict(preprocessed_X_df)
         if prediction > 0:
             st.markdown(f"Predicted insurance cost: **{prediction}**")
@@ -60,14 +60,16 @@ def main_page():
 
         with tab1:
             fig1 = px.strip(data_frame = train_df, x = "smoker", y = "charges")
+            fig1.add_hline(y = train_df[train_df.smoker == 'yes'].mean(), line_color = "crimson")
+            fig1.add_hline(y = train_df[train_df.smoker == 'no'].mean(), line_color = "limegreen")
             st.plotly_chart(fig1)
             st.markdown("Smoking has a significant impact on the cost of insurance. The fact of smoking increases insurance by more than **23,000** units. So if you want to reduce the cost of your health insurance, you need to quit smoking first.")
         with tab2:
-            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges", color = "crimson", trendline = "ols")
+            fig2 = px.scatter(data_frame=train_df, x = "bmi", y = "charges", color = "crimson", opacity = 0.7)
             st.plotly_chart(fig2)
             st.write("As your body mass index increases, the cost of health insurance increases too. After quitting smoking, you need to reduce the index value - lose weight.")
         with tab3:
-            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", trendline = "ols")
+            fig3 = px.scatter(data_frame= train_df, x = "age", y = "charges", opacity = 0.7)
             st.plotly_chart(fig3)
             st.write("At older ages, the cost of insurance increases - this must be taken into account when purchasing health insurance.")
 
