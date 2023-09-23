@@ -23,7 +23,7 @@ Exploratory data analysis was processed with pandas and seaborn libraries. To pr
 
 ## Repository structure
 
-- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda_and_prediction_model/pred_insurance.ipynb) в папке eda_and_prediction_model - exploratory data analysis and building Linear regression model
+- [pred_insurance.ipynb](https://github.com/yana-b27/prediction_insurance_cost/blob/main/eda/pred_insurance.ipynb) в папке eda_and_prediction_model - exploratory data analysis and building Linear regression model
 - [model_file.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_file.py) -data processing and prediction model collected in Pyhton functions
 - [model_app.py](https://github.com/yana-b27/prediction_insurance_cost/blob/main/model_app.py) - code of the app built on Streamlit framework, which imports functions of the model_file module
 - [data](https://github.com/yana-b27/prediction_insurance_cost/tree/main/data) - folder with the coefficients of the model stored in the file model_weights.mw
