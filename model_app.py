@@ -54,7 +54,7 @@ def main_page():
         if prediction > 0:
             st.markdown(f"Predicted insurance cost: **{prediction}**")
         else:
-            st.info(f"Predicted insurance cost: **{prediction}**. You don't need an insurance:)")
+            st.markdown(f"Predicted insurance cost: **{prediction}**. You don't need an insurance:)")
 
     with col2:
         st.header("What cause such insurance cost?")
