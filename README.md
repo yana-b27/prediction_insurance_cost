@@ -1,5 +1,5 @@
 # prediction_insurance_cost
-![Drugs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
+![Drugs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/images/myriam-zilles-KltoLK6Mk-g-unsplash(up).jpg)
 
 _The app is on update now!_
 
@@ -35,5 +35,3 @@ Used images of the application were downloaded via the [link](https://unsplash.c
 **The app is available via the [link](https://prediction-insurance-cost.streamlit.app/)**
 
 In streamlit appplication users can input features for prediction insurance cost in the special field. In parallel with the data entry field in the application, there is a field that interprets the resulting prediction result based on the model. It features interactive graphs that help the user interpret the prediction along with explanatory text.
-
-![Interactive graphs](https://github.com/yana-b27/prediction_insurance_cost/blob/main/data/pred_cost_graphs.gif)
